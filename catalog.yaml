@@ -1,0 +1,94 @@
+id: three-tier-web
+version: 2.3.0
+name: Three-tier web application
+summary: >
+  Public HTTPS endpoint via Global External Load Balancer, stateless Cloud Run
+  service, managed Cloud SQL for PostgreSQL.
+
+components:
+  - id: edge
+    module: acme/load-balancer/google
+    version: 4.2.1
+    required: true
+  - id: compute
+    one_of: [cloud_run, gke_autopilot, cloud_functions]
+    default: cloud_run
+  - id: database
+    one_of: [cloud_sql_postgres, alloydb_postgres]
+    default: cloud_sql_postgres
+  - id: cache
+    module: acme/memorystore-redis/google
+    version: 1.2.0
+    required: false
+  - id: observability
+    module: acme/observability/google
+    version: 2.4.0
+    required: true
+    locked: true
+
+questions:
+  - key: environment
+    prompt: "Which environment? (dev/staging/prod)"
+    type: enum
+    values: [dev, staging, prod]
+  - key: region
+    prompt: "Primary region?"
+    type: enum
+    values_from: policy.allowed_regions
+  - key: expected_rps
+    prompt: "Expected peak requests per second?"
+    type: number
+    drives:
+      - target: compute.min_instances
+        band:
+          - {max: 10,   value: 1}
+          - {max: 100,  value: 2}
+          - {max: 1000, value: 4}
+          - {value: 8}
+      - target: compute.max_instances
+        expr: "max(int(answer * 0.04), 2)"
+      - target: database.tier
+        band:
+          - {max: 100,   value: db-custom-1-3840}
+          - {max: 1000,  value: db-custom-2-7680}
+          - {max: 5000,  value: db-custom-4-15360}
+          - {value: db-custom-8-30720}
+  - key: data_classification
+    prompt: "Data classification?"
+    type: enum
+    values: [public, internal, confidential, restricted]
+    default: internal
+  - key: container_image_tag
+    prompt: "Container image tag for initial deploy?"
+    type: string
+    required: false
+
+# Pattern-wide inputs. Sentinels beginning __POLICY_ are substituted by the
+# policy overlay — this is how a pattern says \"the platform will decide this
+# based on classification\" without hard-coding per-classification logic.
+pattern_inputs:
+  edge:
+    domains: ["__SET_VIA_ANSWER__"]     # placeholder, pattern has no domain question in this minimal example
+    cloud_armor_policy: __POLICY_ARMOR__
+    enable_cdn: true
+  database:
+    kms_key_name: __POLICY_CMEK__
+    availability_type: REGIONAL
+    backup_retention_days: 14
+  compute:
+    target_concurrency: 80
+  observability:
+    grafana_folder: __SET_FROM_TEAM__
+    slo_availability: 99.9
+    slo_latency_p99: 500
+
+# Inter-module wiring — Terraform expressions carried through as raw HCL.
+wiring:
+  compute.neg_for_lb: "${module.edge.serverless_neg_name}"
+  observability.targets: "[module.compute.service_name, module.database.instance_name]"
+
+sla:
+  availability: 99.9
+  latency_p99_ms: 500
+  rto_minutes: 30
+  rpo_minutes: 15
