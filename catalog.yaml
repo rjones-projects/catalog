@@ -1,6 +1,57 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
+  name: pat-002-analytics-orchestration-pipeline
+  title: "PAT-002 – Analytics / Orchestration Pipeline"
+  description: >
+    Legacy-style NWP delivery stack for orchestrated data processing with
+    environments, SQL, buckets, and deploy chain modules.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - analytics
+    - orchestration
+    - data-pipeline
+    - nwp
+  links:
+    - title: Pattern Registry
+      url: https://internal.example.com/patterns/pat-002
+spec:
+  owner: platform-engineering
+  domain: data-platform
+  lifecycle: first_release_candidate
+  profile:
+    displayName: "PAT-002 Analytics / Orchestration Pipeline"
+  metadata:
+    releaseBucket: released_reusable_pattern
+    firstReleaseTreatment: >
+      First-release reusable pattern candidate for architecture/security approval.
+    runtimeType: "Composer / data orchestration"
+    projectCount: 15
+    buildingBlocks:
+      required:
+        - bastion
+        - delivery
+        - environment
+        - integration
+        - keys
+        - network
+        - security_operations
+      optional:
+        - bigquery
+        - bucket
+        - composer
+        - gke
+        - iam
+        - network_policy
+        - pubsub
+        - security_policy
+        - sql
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
   name: pat-003-cloud-run-application-with-database
   title: "PAT-003 – Cloud Run Application with Database"
   description: >
@@ -47,4 +98,57 @@ spec:
         - environment
         - integration
         - network_policy
+        - pubsub
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-004-helm-gke-application-platform
+  title: "PAT-004 – Helm / GKE Application Platform"
+  description: >
+    Application stack centered on GKE/Helm deployment, usually with supporting
+    messaging, IAM, and orchestration services.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - gke
+    - helm
+    - kubernetes
+    - application-platform
+  links:
+    - title: Pattern Registry
+      url: https://internal.example.com/patterns/pat-004
+spec:
+  owner: platform-engineering
+  domain: application-platform
+  lifecycle: first_release_candidate
+  profile:
+    displayName: "PAT-004 Helm / GKE Application Platform"
+  metadata:
+    releaseBucket: released_reusable_pattern
+    firstReleaseTreatment: >
+      First-release reusable pattern candidate for architecture/security approval.
+    runtimeType: "GKE / Helm"
+    projectCount: 4
+    buildingBlocks:
+      required:
+        - bastion
+        - bigquery
+        - bucket
+        - composer
+        - delivery
+        - environment
+        - gke
+        - helm
+        - iam
+        - integration
+        - keys
+        - network
+        - security_operations
+        - security_policy
+        - sql
+      optional:
+        - network_policy
+        - platform_operations
         - pubsub
