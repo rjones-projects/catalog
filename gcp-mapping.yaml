@@ -4,7 +4,7 @@ metadata:
   name: bastion
   title: "Bastion Host"
   description: >
-    Terraform module that provisions a hardened bastion/jump host for secure
+    Architectural component that provisions a hardened bastion/jump host for secure
     SSH access into private VPC networks.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bastion
@@ -25,7 +25,7 @@ metadata:
   name: bigquery
   title: "BigQuery"
   description: >
-    Terraform module that provisions BigQuery datasets, tables, and associated
+    Architectural component that provisions BigQuery datasets, tables, and associated
     IAM bindings for analytics workloads.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bigquery
@@ -46,7 +46,7 @@ metadata:
   name: bucket
   title: "GCS Bucket"
   description: >
-    Terraform module that provisions Google Cloud Storage buckets with lifecycle
+    Architectural component that provisions Google Cloud Storage buckets with lifecycle
     policies, versioning, and IAM bindings.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bucket
@@ -66,7 +66,7 @@ metadata:
   name: cloud-run
   title: "Cloud Run"
   description: >
-    Terraform module that deploys a Cloud Run service with traffic configuration,
+    Architectural component that deploys a Cloud Run service with traffic configuration,
     VPC connector, and IAM invoker bindings.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/cloud_run
@@ -87,7 +87,7 @@ metadata:
   name: composer
   title: "Cloud Composer"
   description: >
-    Terraform module that provisions a Cloud Composer (managed Apache Airflow)
+    Architectural component that provisions a Cloud Composer (managed Apache Airflow)
     environment with private IP and custom environment variables.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/composer
@@ -108,7 +108,7 @@ metadata:
   name: delivery
   title: "Delivery Pipeline"
   description: >
-    Terraform module that sets up a CI/CD delivery pipeline (Cloud Deploy or
+    Architectural component that sets up a CI/CD delivery pipeline (Cloud Deploy or
     Cloud Build) for automated application releases.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/delivery
@@ -129,7 +129,7 @@ metadata:
   name: environment
   title: "Environment"
   description: >
-    Terraform module that scaffolds a GCP project environment including folder
+    Architectural component that scaffolds a GCP project environment including folder
     structure, project APIs, and baseline labels.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/environment
@@ -149,7 +149,7 @@ metadata:
   name: gke
   title: "GKE Cluster"
   description: >
-    Terraform module that provisions a private GKE cluster with node pools,
+    Architectural component that provisions a private GKE cluster with node pools,
     Workload Identity, and binary authorization.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/gke
@@ -170,7 +170,7 @@ metadata:
   name: helm
   title: "Helm Deployment"
   description: >
-    Terraform module that manages Helm chart releases on a GKE cluster using
+    Architectural component that manages Helm chart releases on a GKE cluster using
     the Helm provider, including values and namespace setup.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/helm
@@ -191,7 +191,7 @@ metadata:
   name: iam
   title: "IAM"
   description: >
-    Terraform module that manages IAM service accounts, role bindings, and
+    Architectural component that manages IAM service accounts, role bindings, and
     Workload Identity Federation configurations.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/iam
@@ -212,7 +212,7 @@ metadata:
   name: integration
   title: "Integration"
   description: >
-    Terraform module that provisions integration connectors and API gateway
+    Architectural component that provisions integration connectors and API gateway
     resources for service-to-service communication.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/integration
@@ -233,7 +233,7 @@ metadata:
   name: keys
   title: "KMS Keys"
   description: >
-    Terraform module that provisions Cloud KMS keyrings and crypto keys for
+    Architectural component that provisions Cloud KMS keyrings and crypto keys for
     envelope encryption of data at rest.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/keys
@@ -254,7 +254,7 @@ metadata:
   name: network
   title: "Network"
   description: >
-    Terraform module that provisions a VPC network with subnets, Cloud NAT,
+    Architectural component that provisions a VPC network with subnets, Cloud NAT,
     and DNS configuration for private workloads.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/network
@@ -275,7 +275,7 @@ metadata:
   name: network-policy
   title: "Network Policy"
   description: >
-    Terraform module that manages VPC firewall rules and GKE network policies
+    Architectural component that manages VPC firewall rules and GKE network policies
     to enforce least-privilege traffic flows.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/network_policy
@@ -296,7 +296,7 @@ metadata:
   name: platform-operations
   title: "Platform Operations"
   description: >
-    Terraform module that provisions platform-level operational tooling including
+    Architectural component that provisions platform-level operational tooling including
     monitoring dashboards, alerting policies, and SLO configurations.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/platform_operations
@@ -317,7 +317,7 @@ metadata:
   name: pubsub
   title: "Pub/Sub"
   description: >
-    Terraform module that provisions Pub/Sub topics and subscriptions with
+    Architectural component that provisions Pub/Sub topics and subscriptions with
     dead-letter queues and IAM publisher/subscriber bindings.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/pubsub
@@ -338,7 +338,7 @@ metadata:
   name: security-operations
   title: "Security Operations"
   description: >
-    Terraform module that configures Security Command Center, audit log sinks,
+    Architectural component that configures Security Command Center, audit log sinks,
     and SIEM export for centralised security monitoring.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/security_operations
@@ -359,7 +359,7 @@ metadata:
   name: security-policy
   title: "Security Policy"
   description: >
-    Terraform module that enforces organisation policies, VPC Service Controls
+    Architectural component that enforces organisation policies, VPC Service Controls
     perimeters, and Binary Authorization policies.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/security_policy
@@ -380,7 +380,7 @@ metadata:
   name: sql
   title: "Cloud SQL"
   description: >
-    Terraform module that provisions a Cloud SQL instance (PostgreSQL or MySQL)
+    Architectural component that provisions a Cloud SQL instance (PostgreSQL or MySQL)
     with private IP, automated backups, and IAM database authentication.
   annotations:
     backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/sql
