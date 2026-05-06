@@ -16,7 +16,7 @@ metadata:
     - nwp
   links:
     - title: Pattern Registry
-      url: https://internal.example.com/patterns/pat-002
+      url: https://internal.vodafone.com/patterns/pat-002
 spec:
   owner: platform-engineering
   domain: data-platform
@@ -67,7 +67,7 @@ metadata:
     - sql
   links:
     - title: Pattern Registry
-      url: https://internal.example.com/patterns/pat-003
+      url: https://internal.vodafone.com/patterns/pat-003
 spec:
   owner: platform-engineering
   domain: application-platform
@@ -118,7 +118,7 @@ metadata:
     - application-platform
   links:
     - title: Pattern Registry
-      url: https://internal.example.com/patterns/pat-004
+      url: https://internal.vodafone.com/patterns/pat-004
 spec:
   owner: platform-engineering
   domain: application-platform
