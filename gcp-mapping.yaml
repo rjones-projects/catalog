@@ -17,7 +17,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-bastion
+    - Component:tf-module-bastion
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -38,7 +38,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-bigquery
+    - Component:tf-module-bigquery
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -58,7 +58,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-bucket
+    - Component:tf-module-bucket
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -79,7 +79,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-cloud-run
+    - Component:tf-module-cloud-run
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -100,7 +100,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-composer
+    - Component:tf-module-composer
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -121,7 +121,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-delivery
+    - Component:tf-module-delivery
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -141,7 +141,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-environment
+    - Component:tf-module-environment
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -162,7 +162,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-gke
+    - Component:tf-module-gke
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -183,7 +183,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-helm
+    - Component:tf-module-helm
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -204,7 +204,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-iam
+    - Component:tf-module-iam
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -225,7 +225,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-integration
+    - Component:tf-module-integration
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -246,7 +246,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-keys
+    - Component:tf-module-keys
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -267,7 +267,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-network
+    - Component:tf-module-network
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -288,7 +288,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-network-policy
+    - Component:tf-module-network-policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -309,7 +309,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-platform-operations
+    - Component:tf-module-platform-operations
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -330,7 +330,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-pubsub
+    - Component:tf-module-pubsub
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -351,7 +351,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-security-operations
+    - Component:tf-module-security-operations
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -372,7 +372,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-security-policy
+    - Component:tf-module-security-policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -393,4 +393,4 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-sql
+    - Component:tf-module-sql
