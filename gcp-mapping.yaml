@@ -7,7 +7,7 @@ metadata:
     Architectural component that provisions a hardened bastion/jump host for secure
     SSH access into private VPC networks.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bastion
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/bastion
   tags:
     - terraform-module
     - networking
@@ -17,7 +17,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-bastion
+    - Component:bastion_vm
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -28,7 +28,7 @@ metadata:
     Architectural component that provisions BigQuery datasets, tables, and associated
     IAM bindings for analytics workloads.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bigquery
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/bigquery
   tags:
     - terraform-module
     - analytics
@@ -38,7 +38,8 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-bigquery
+    - Component: bigquery
+    - Component: bigquery_table
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -49,7 +50,7 @@ metadata:
     Architectural component that provisions Google Cloud Storage buckets with lifecycle
     policies, versioning, and IAM bindings.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/bucket
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/bucket
   tags:
     - terraform-module
     - storage
@@ -58,7 +59,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-bucket
+    - Component: gcs
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -69,7 +70,7 @@ metadata:
     Architectural component that deploys a Cloud Run service with traffic configuration,
     VPC connector, and IAM invoker bindings.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/cloud_run
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/cloud_run
   tags:
     - terraform-module
     - compute
@@ -79,7 +80,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-cloud-run
+    - Component:cloud_run
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -90,7 +91,7 @@ metadata:
     Architectural component that provisions a Cloud Composer (managed Apache Airflow)
     environment with private IP and custom environment variables.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/composer
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/composer
   tags:
     - terraform-module
     - orchestration
@@ -100,7 +101,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-composer
+    - Component:composer_environment
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -111,7 +112,7 @@ metadata:
     Architectural component that sets up a CI/CD delivery pipeline (Cloud Deploy or
     Cloud Build) for automated application releases.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/delivery
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/delivery
   tags:
     - terraform-module
     - cicd
@@ -121,7 +122,8 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-delivery
+    - Component: cloud_build
+    - Component: cloud_build_private_worker_pool
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -132,7 +134,7 @@ metadata:
     Architectural component that scaffolds a GCP project environment including folder
     structure, project APIs, and baseline labels.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/environment
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/environment
   tags:
     - terraform-module
     - foundation
@@ -141,7 +143,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-environment
+    - Component:Template-level config - no modules
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -152,7 +154,7 @@ metadata:
     Architectural component that provisions a private GKE cluster with node pools,
     Workload Identity, and binary authorization.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/gke
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/gke
   tags:
     - terraform-module
     - kubernetes
@@ -162,7 +164,8 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-gke
+    - Component: gke_autopilot_cluster
+    - Component: gke_standard_cluster
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -173,7 +176,7 @@ metadata:
     Architectural component that manages Helm chart releases on a GKE cluster using
     the Helm provider, including values and namespace setup.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/helm
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/helm
   tags:
     - terraform-module
     - kubernetes
@@ -183,7 +186,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-helm
+    - Component: gap  -> we won't go with helm - we will replace with ArgoCD 
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -194,7 +197,7 @@ metadata:
     Architectural component that manages IAM service accounts, role bindings, and
     Workload Identity Federation configurations.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/iam
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/iam
   tags:
     - terraform-module
     - security
@@ -204,7 +207,10 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-iam
+    - Component: iam_service_account
+    - Component: project_iam
+    - Component: iam_custom_role_stack
+    - Component: service_agent_iam
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -215,7 +221,7 @@ metadata:
     Architectural component that provisions integration connectors and API gateway
     resources for service-to-service communication.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/integration
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/integration
   tags:
     - terraform-module
     - integration
@@ -225,7 +231,9 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-integration
+    - Component: vpc_connector
+    - Component: workload_identity
+    - Component: cloud_build
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -236,7 +244,7 @@ metadata:
     Architectural component that provisions Cloud KMS keyrings and crypto keys for
     envelope encryption of data at rest.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/keys
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/keys
   tags:
     - terraform-module
     - security
@@ -246,7 +254,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-keys
+    - Component: kms
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -257,7 +265,7 @@ metadata:
     Architectural component that provisions a VPC network with subnets, Cloud NAT,
     and DNS configuration for private workloads.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/network
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/network
   tags:
     - terraform-module
     - networking
@@ -267,7 +275,11 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-network
+    - Component: network
+    - Component: firewall
+    - Component: dns
+    - Component: external_global_address
+    - Component: external_global_loadbalancer
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -278,7 +290,7 @@ metadata:
     Architectural component that manages VPC firewall rules and GKE network policies
     to enforce least-privilege traffic flows.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/network_policy
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/network_policy
   tags:
     - terraform-module
     - networking
@@ -288,7 +300,8 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-network-policy
+    - Component: firewall
+    - Component: vf_security_policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -299,7 +312,7 @@ metadata:
     Architectural component that provisions platform-level operational tooling including
     monitoring dashboards, alerting policies, and SLO configurations.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/platform_operations
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/platform_operations
   tags:
     - terraform-module
     - operations
@@ -309,7 +322,9 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-platform-operations
+    - Component: cloud_build_private_worker_pool
+    - Component: workload_identity
+    - Component: project_services        
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -320,7 +335,7 @@ metadata:
     Architectural component that provisions Pub/Sub topics and subscriptions with
     dead-letter queues and IAM publisher/subscriber bindings.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/pubsub
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/pubsub
   tags:
     - terraform-module
     - messaging
@@ -330,7 +345,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-pubsub
+    - Component: pubsub
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -341,7 +356,7 @@ metadata:
     Architectural component that configures Security Command Center, audit log sinks,
     and SIEM export for centralised security monitoring.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/security_operations
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/security_operations
   tags:
     - terraform-module
     - security
@@ -351,7 +366,12 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-security-operations
+    - Component: alert_policy
+    - Component: notification_channel
+    - Component: dashboard_bq
+    - Component: dashboard_composer
+    - Component: dashboard_dataproc
+    - Component: dashboard_gcs
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -362,7 +382,7 @@ metadata:
     Architectural component that enforces organisation policies, VPC Service Controls
     perimeters, and Binary Authorization policies.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/security_policy
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/security_policy
   tags:
     - terraform-module
     - security
@@ -372,7 +392,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-security-policy
+    - Component: vf_security_policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -383,7 +403,7 @@ metadata:
     Architectural component that provisions a Cloud SQL instance (PostgreSQL or MySQL)
     with private IP, automated backups, and IAM database authentication.
   annotations:
-    backstage.io/source-location: url:https://github.com/org/terraform-modules/tree/main/modules/sql
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/sql
   tags:
     - terraform-module
     - database
@@ -393,4 +413,26 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component:tf-module-sql
+    - Component: cloud_sql
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: vm_workload
+  title: "Virtual Machine"
+  description: >
+    Architectural component that provisions a VM instance (Linux or Windows)
+    with private IP, automated backups, and IAM authentication.
+  annotations:
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/vm_workload
+  tags:
+    - terraform-module
+    - vm_workload
+spec:
+  type: architectural
+  lifecycle: production
+  owner: platform-engineering
+  dependsOn:
+    - Component: compute_instance
+    - Component: compute_disk
+    - Component: compute_resource_policy
