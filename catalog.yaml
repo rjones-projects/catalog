@@ -1,11 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: pat-002-analytics-orchestration-pipeline
-  title: "PAT-002 – Analytics / Orchestration Pipeline"
+  name: pat-002-batch-orchestration-pipeline
+  title: "PAT-002 – Batch Orchestration Pipeline"
   description: >
-    Legacy-style NWP delivery stack for orchestrated data processing with
-    environments, SQL, buckets, and deploy chain modules.
+    Managed workflow orchestration with structured storage, object storage,
+    query engine, and deploy chain modules. Merged with Data Processing &
+    Analytics Platform.
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
@@ -13,21 +14,23 @@ metadata:
     - analytics
     - orchestration
     - data-pipeline
-    - nwp
+    - workflow
+    - batch
   links:
     - title: Pattern Registry
       url: https://internal.vodafone.com/patterns/pat-002
 spec:
   owner: platform-engineering
   domain: data-platform
-  lifecycle: first_release_candidate
+  lifecycle: released_reusable_pattern
   profile:
-    displayName: "PAT-002 Analytics / Orchestration Pipeline"
+    displayName: "PAT-002 Batch Orchestration Pipeline"
   metadata:
     releaseBucket: released_reusable_pattern
-    firstReleaseTreatment: >
-      First-release reusable pattern candidate for architecture/security approval.
-    runtimeType: "Composer / data orchestration"
+    patternNotes: >
+      Merged with Data Processing & Analytics Platform. Use for enterprise
+      analytics & data lake, regulatory data storage, and scheduled ETL/ELT.
+    runtimeType: "Workflow orchestration"
     projectCount: 15
     buildingBlocks:
       required:
@@ -52,16 +55,18 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: pat-003-cloud-run-application-with-database
-  title: "PAT-003 – Cloud Run Application with Database"
+  name: pat-003-serverless-application-with-managed-database
+  title: "PAT-003 – Serverless Application with Managed Database"
   description: >
-    Application platform using Cloud Run services plus a managed SQL database
-    and supporting security/identity modules.
+    Serverless compute with a managed relational database and supporting
+    security/identity modules. Aligns with Secure Single-Tier Web Application
+    at its simplest form.
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
     - pattern
     - cloud-run
+    - serverless
     - application-platform
     - database
     - sql
@@ -71,14 +76,16 @@ metadata:
 spec:
   owner: platform-engineering
   domain: application-platform
-  lifecycle: first_release_candidate
+  lifecycle: released_reusable_pattern
   profile:
-    displayName: "PAT-003 Cloud Run Application with Database"
+    displayName: "PAT-003 Serverless Application with Managed Database"
   metadata:
     releaseBucket: released_reusable_pattern
-    firstReleaseTreatment: >
-      First-release reusable pattern candidate for architecture/security approval.
-    runtimeType: "Cloud Run"
+    patternNotes: >
+      Aligns with Secure Single-Tier Web Application at its simplest form.
+      Use for internal tooling & PoCs, lightweight public APIs, and
+      low-traffic web apps.
+    runtimeType: "Serverless container runtime"
     projectCount: 5
     buildingBlocks:
       required:
@@ -103,11 +110,12 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: pat-004-helm-gke-application-platform
-  title: "PAT-004 – Helm / GKE Application Platform"
+  name: pat-004-container-orchestrated-application-platform
+  title: "PAT-004 – Container-Orchestrated Application Platform"
   description: >
-    Application stack centered on GKE/Helm deployment, usually with supporting
-    messaging, IAM, and orchestration services.
+    Managed container orchestration with perimeter security, private
+    networking, managed database access, and supporting identity/messaging
+    services. Merged with Multi-Tier Production Web Application.
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
@@ -115,6 +123,7 @@ metadata:
     - gke
     - helm
     - kubernetes
+    - container-orchestration
     - application-platform
   links:
     - title: Pattern Registry
@@ -122,14 +131,16 @@ metadata:
 spec:
   owner: platform-engineering
   domain: application-platform
-  lifecycle: first_release_candidate
+  lifecycle: released_reusable_pattern
   profile:
-    displayName: "PAT-004 Helm / GKE Application Platform"
+    displayName: "PAT-004 Container-Orchestrated Application Platform"
   metadata:
     releaseBucket: released_reusable_pattern
-    firstReleaseTreatment: >
-      First-release reusable pattern candidate for architecture/security approval.
-    runtimeType: "GKE / Helm"
+    patternNotes: >
+      Merged with Multi-Tier Production Web Application. Use for
+      customer-facing production apps, regulatory workloads, and
+      high-SLA services.
+    runtimeType: "Managed container orchestration"
     projectCount: 4
     buildingBlocks:
       required:
@@ -152,3 +163,202 @@ spec:
         - network_policy
         - platform_operations
         - pubsub
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-005-event-driven-microservices-platform
+  title: "PAT-005 – Event-Driven Microservices Platform"
+  description: >
+    Decoupled services communicating via an async messaging bus, with event
+    routing, fast in-memory/document stores, and observability tooling.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - event-driven
+    - microservices
+    - messaging
+    - pubsub
+    - observability
+  links:
+    - title: Pattern Registry
+      url: https://internal.vodafone.com/patterns/pat-005
+spec:
+  owner: platform-engineering
+  domain: application-platform
+  lifecycle: candidate_requires_review
+  profile:
+    displayName: "PAT-005 Event-Driven Microservices Platform"
+  metadata:
+    releaseBucket: candidate_requires_review
+    patternNotes: >
+      Candidate pattern pending architecture and security review. Use for
+      decoupled microservices, fan-out/fan-in workloads, and event-sourced
+      systems.
+    runtimeType: "Serverless or container runtime + message bus"
+    projectCount: 0
+    buildingBlocks:
+      required:
+        - iam
+        - keys
+        - network
+        - pubsub
+        - security_operations
+        - security_policy
+      optional:
+        - bigquery
+        - bucket
+        - cloud_run
+        - delivery
+        - environment
+        - gke
+        - helm
+        - integration
+        - network_policy
+        - sql
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-006-data-ingestion-landing-zone
+  title: "PAT-006 – Data Ingestion Landing Zone"
+  description: >
+    Ingestion and storage foundation centred on object storage, structured
+    datasets, identity controls, and landing-zone access patterns.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - data-ingestion
+    - landing-zone
+    - data-lake
+    - storage
+  links:
+    - title: Pattern Registry
+      url: https://internal.vodafone.com/patterns/pat-006
+spec:
+  owner: platform-engineering
+  domain: data-platform
+  lifecycle: candidate_requires_review
+  profile:
+    displayName: "PAT-006 Data Ingestion Landing Zone"
+  metadata:
+    releaseBucket: candidate_requires_review
+    patternNotes: >
+      Candidate pattern pending architecture and security review. Use for
+      data lake raw zone and multi-source ingestion.
+    runtimeType: "Data foundation"
+    projectCount: 0
+    buildingBlocks:
+      required:
+        - bigquery
+        - bucket
+        - iam
+        - keys
+        - network
+        - security_operations
+        - security_policy
+      optional:
+        - bastion
+        - composer
+        - delivery
+        - environment
+        - integration
+        - network_policy
+        - pubsub
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-007-shared-platform-runtime-project
+  title: "PAT-007 – Shared Platform Runtime Project"
+  description: >
+    Central infrastructure providing shared container clusters, worker pools,
+    secrets/networking, and platform-level operations to tenant workloads.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - platform
+    - shared-infrastructure
+    - kubernetes
+    - multi-tenant
+  links:
+    - title: Pattern Registry
+      url: https://internal.vodafone.com/patterns/pat-007
+spec:
+  owner: platform-engineering
+  domain: platform-engineering
+  lifecycle: internal_platform_pattern
+  profile:
+    displayName: "PAT-007 Shared Platform Runtime Project"
+  metadata:
+    releaseBucket: internal_platform_pattern
+    patternNotes: >
+      Internal platform pattern for platform/SRE teams managing multi-tenant
+      cluster hosting.
+    runtimeType: "Shared container platform runtime"
+    projectCount: 0
+    buildingBlocks:
+      required:
+        - gke
+        - iam
+        - keys
+        - network
+        - platform_operations
+        - security_operations
+        - security_policy
+      optional:
+        - bastion
+        - delivery
+        - helm
+        - network_policy
+        - pubsub
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-008-specialised-vm-workload-platform
+  title: "PAT-008 – Specialised VM Workload Platform"
+  description: >
+    VM-centric stack with network, firewall, and relational database resources
+    for proprietary or specialised software that cannot run in containers.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - virtual-machine
+    - legacy
+    - specialised
+    - database
+  links:
+    - title: Pattern Registry
+      url: https://internal.vodafone.com/patterns/pat-008
+spec:
+  owner: platform-engineering
+  domain: specialised-compute
+  lifecycle: reference_specialized
+  profile:
+    displayName: "PAT-008 Specialised VM Workload Platform"
+  metadata:
+    releaseBucket: reference_specialized
+    patternNotes: >
+      Reference pattern for specialised workloads; not for general reuse.
+      Use for licensed desktop-class software, GIS/CAD platforms, and
+      legacy workloads.
+    runtimeType: "Specialised virtual machine"
+    projectCount: 0
+    buildingBlocks:
+      required:
+        - iam
+        - keys
+        - network
+        - security_policy
+        - sql
+      optional:
+        - bastion
+        - bucket
+        - environment
+        - network_policy
+        - security_operations
