@@ -22,13 +22,13 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: bigquery
-  title: "BigQuery"
+  name: analytics
+  title: "analytics"
   description: >
-    Architectural component that provisions BigQuery datasets, tables, and associated
+    Architectural component that provisions analytics datasets, tables, and associated
     IAM bindings for analytics workloads.
   annotations:
-    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/bigquery
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/analytics
   tags:
     - terraform-module
     - analytics
@@ -64,13 +64,13 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: cloud-run
-  title: "Cloud Run"
+  name: serverless_app
+  title: "serverless app"
   description: >
-    Architectural component that deploys a Cloud Run service with traffic configuration,
+    Architectural component that deploys a serverless app service with traffic configuration,
     VPC connector, and IAM invoker bindings.
   annotations:
-    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/cloud_run
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/serverless_app
   tags:
     - terraform-module
     - compute
@@ -85,13 +85,13 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: composer
-  title: "Cloud Composer"
+  name: workflow
+  title: "Cloud Workflow"
   description: >
-    Architectural component that provisions a Cloud Composer (managed Apache Airflow)
+    Architectural component that provisions a Cloud Workflow (e.g. managed Apache Airflow)
     environment with private IP and custom environment variables.
   annotations:
-    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/composer
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/workflow
   tags:
     - terraform-module
     - orchestration
@@ -148,13 +148,13 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: gke
-  title: "GKE Cluster"
+  name: k8s
+  title: "K8s Cluster"
   description: >
-    Architectural component that provisions a private GKE cluster with node pools,
+    Architectural component that provisions a private K8s cluster with node pools,
     Workload Identity, and binary authorization.
   annotations:
-    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/gke
+    backstage.io/source-location: url:https://github.com/rjones-projects/catalog/k8s
   tags:
     - terraform-module
     - kubernetes
