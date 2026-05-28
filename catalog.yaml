@@ -76,13 +76,6 @@ spec:
     releaseBucket: released_reusable_pattern
     firstReleaseTreatment: "First-release reusable pattern candidate for architecture/security approval."
     runtimeType: "Workflow / data orchestration"
-    projectCount: 15
-    representativeExamples:
-      - vf-de-nwp-live
-      - vf-de-nwp-nonlive
-      - vf-gned-nwp-live
-      - vf-gned-nwp-nonlive
-      - vf-gned-nwpccs-live
     buildingBlocks:
       required:
         - bastion
