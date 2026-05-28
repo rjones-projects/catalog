@@ -164,7 +164,7 @@ spec:
   lifecycle: production
   owner: platform-engineering
   dependsOn:
-    - Component: gke_autopilot_cluster
+    # - Component: gke_autopilot_cluster
     - Component: gke_standard_cluster
 ---
 apiVersion: backstage.io/v1alpha1
