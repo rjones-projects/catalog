@@ -28,9 +28,6 @@ spec:
     releaseBucket: candidate_requires_review
     firstReleaseTreatment: "Candidate or appendix item until architecture confirms repeatability beyond the current representative project."
     runtimeType: "Data foundation"
-    projectCount: 1
-    representativeExamples:
-      - vf-gned-nwpdfd-nonlive
     buildingBlocks:
       required:
         - bigquery
@@ -40,6 +37,13 @@ spec:
         - keys
         - network
       optional: []
+      default:
+        - bigquery
+        - bucket
+        - environment
+        - iam
+        - keys
+        - network 
 ---      
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -92,12 +96,23 @@ spec:
         - bigquery
         - bucket
         - workflow
-        - k8s
+        - K8s
         - iam
         - network_policy
         - pubsub
         - security_policy
         - sql
+      default:
+        - bastion
+        - delivery
+        - environment
+        - integration
+        - keys
+        - network
+        - security_operations
+        - iam
+        - bigquery
+        - bucket
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -145,13 +160,6 @@ spec:
     releaseBucket: released_reusable_pattern
     firstReleaseTreatment: "First-release reusable pattern candidate for architecture/security approval."
     runtimeType: "Serverless container runtime"
-    projectCount: 5
-    representativeExamples:
-      - vf-gned-nwpenergyedm-live
-      - vf-gned-nwpenergyedm-nonlive
-      - vf-gned-nwpenergyib-live
-      - vf-gned-nwpenergyib-nonlive
-      - vf-gned-str-nonlive
     buildingBlocks:
       required:
         - bastion
@@ -164,7 +172,7 @@ spec:
         - sql
       optional:
         - serverless_app
-        - k8s
+        - K8s
         - helm 
         - analytics
         - workflow
@@ -173,4 +181,16 @@ spec:
         - integration
         - network_policy
         - pubsub
+      default:
+        - bastion
+        - bucket
+        - iam
+        - keys
+        - network
+        - security_operations
+        - security_policy
+        - sql
+        - serverless_app
+        - analytics
+        - integration
 ---
