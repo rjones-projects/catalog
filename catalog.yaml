@@ -30,7 +30,7 @@ spec:
     runtimeType: "Data foundation"
     buildingBlocks:
       required:
-        - bigquery
+        - analytics
         - bucket
         - environment
         - iam
@@ -38,7 +38,7 @@ spec:
         - network
       optional: []
       default:
-        - bigquery
+        - analytics
         - bucket
         - environment
         - iam
@@ -86,7 +86,7 @@ spec:
         - network
         - security_operations
       optional:
-        - bigquery
+        - analytics
         - bucket
         - workflow
         - K8s
@@ -104,7 +104,7 @@ spec:
         - network
         - security_operations
         - iam
-        - bigquery
+        - analytics
         - bucket
 ---
 apiVersion: backstage.io/v1alpha1
