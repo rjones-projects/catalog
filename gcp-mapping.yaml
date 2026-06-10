@@ -284,7 +284,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: network-policy
+  name: network_policy
   title: "Network Policy"
   description: >
     Architectural component that manages VPC firewall rules and GKE network policies
@@ -376,7 +376,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: security-policy
+  name: security_policy
   title: "Security Policy"
   description: >
     Architectural component that enforces organisation policies, VPC Service Controls
