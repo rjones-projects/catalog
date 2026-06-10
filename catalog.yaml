@@ -89,7 +89,7 @@ spec:
         - analytics
         - bucket
         - workflow
-        - K8s
+        - k8s
         - iam
         - network_policy
         - pubsub
@@ -165,7 +165,7 @@ spec:
         - sql
       optional:
         - serverless_app
-        - K8s
+        - k8s
         - helm 
         - analytics
         - workflow
