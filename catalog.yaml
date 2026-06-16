@@ -110,18 +110,11 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: pat-003-application
-  title: "PAT-003 – Application"
+  name: pat-003-serverless-application
+  title: "PAT-003 – Serverless Application"
   description: >
-    Serverless compute with a managed relational database and supporting security/identity modules
-    OR
-    Managed container orchestration with perimeter security, private networking, managed database access, and shared cluster operations for platform/SRE teams.
-    OR
-    Microservice communicating via an async messaging bus, with event routing, fast in-memory/document stores. (is this served by either/both of the above)
-    OR
-    Mobile application (Is this just a mobile presentation of a Responsive web app?)
-    OR
-    Specialised VM Workload Platform
+    Serverless compute with a managed relational database and supporting
+    security/identity modules.
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
@@ -131,23 +124,15 @@ metadata:
     - application-platform
     - database
     - sql
-    - gke
-    - helm
-    - kubernetes
-    - container-orchestration
-    - application-platform
-    - platform
-    - shared-infrastructure
-    - multi-tenant    
   links:
     - title: Pattern Registry
-      url: https://internal.vodafone.com/patterns/pat-002
+      url: https://internal.vodafone.com/patterns/pat-003
 spec:
   owner: platform-engineering
   domain: application-platform
   lifecycle: released_reusable_pattern
   profile:
-    displayName: "PAT-002 Serverless Application"
+    displayName: "PAT-003 Serverless Application"
   metadata:
     status: first_release_candidate
     releaseBucket: released_reusable_pattern
@@ -157,6 +142,7 @@ spec:
       required:
         - bastion
         - bucket
+        - serverless_app
         - iam
         - keys
         - network
@@ -164,26 +150,92 @@ spec:
         - security_policy
         - sql
       optional:
-        - serverless_app
-        - k8s
-        - helm 
         - analytics
         - workflow
         - delivery
-        - environment
         - integration
         - network_policy
         - pubsub
       default:
-        - bastion
         - bucket
+        - serverless_app
         - iam
         - keys
         - network
         - security_operations
         - security_policy
+        - network_policy        
         - sql
-        - serverless_app
-        - analytics
-        - integration
 ---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pat-004-managed-orchestration-application
+  title: "PAT-004 - Managed Orchestration Application"
+  description: >
+    Managed container orchestration and shared platform runtime project.
+    Provides perimeter security, private networking, managed database access,
+    and supporting identity/messaging services. Also serves as central shared
+    infrastructure for K8s clusters, worker pools, and platform-level operations
+    for platform and SRE teams. Merged with Shared Runtime / Platform Project (PAT-007).
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - pattern
+    - gke
+    - helm
+    - kubernetes
+    - container-orchestration
+    - application-platform
+    - platform
+    - shared-infrastructure
+    - multi-tenant
+  links:
+    - title: Pattern Registry
+      url: https://internal.vodafone.com/patterns/pat-003
+spec:
+  owner: platform-engineering
+  domain: application-platform
+  lifecycle: released_reusable_pattern
+  profile:
+    displayName: "PAT-004 Managed Orchestration Application"
+  metadata:
+    status: first_release_candidate
+    releaseBucket: released_reusable_pattern
+    firstReleaseTreatment: "First-release reusable pattern candidate for architecture/security approval."
+    runtimeType: "K8s / Helm / Shared K8s platform runtime"
+    buildingBlocks:
+      required:
+        - bastion
+        - analytics
+        - bucket
+        - workflow
+        - delivery
+        - K8s
+        - iam
+        - integration
+        - keys
+        - network
+        - security_operations
+        - security_policy
+        - sql
+      optional:
+        - network_policy
+        - platform_operations
+        - pubsub
+      default:
+        - bastion
+        - analytics
+        - bucket
+        - workflow
+        - delivery
+        - K8s
+        - iam
+        - integration
+        - keys
+        - network
+        - network_policy        
+        - security_operations
+        - security_policy
+        - sql
+---        
