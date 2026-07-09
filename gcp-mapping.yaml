@@ -12,12 +12,15 @@ metadata:
     - terraform-module
     - networking
     - security
+  dependencies:
+    bastion_vm:
+      - network
+      - iam_service_account
+      - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component:bastion_vm
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -33,13 +36,14 @@ metadata:
     - terraform-module
     - analytics
     - data
+  dependencies:
+    bigquery:
+      - kms
+    bigquery_table: []  # not independently traced this pass
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: bigquery
-    - Component: bigquery_table
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -54,12 +58,13 @@ metadata:
   tags:
     - terraform-module
     - storage
+  dependencies:
+    gcs:
+      - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: gcs
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -75,12 +80,19 @@ metadata:
     - terraform-module
     - compute
     - serverless
+  dependencies:
+    cloud_run:
+      - kms
+      - vpc_connector
+      - network
+      - secret_manager
+      - cloud_sql
+      - gcs
+      - iam_service_account
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component:cloud_run
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -96,12 +108,15 @@ metadata:
     - terraform-module
     - orchestration
     - data-pipeline
+  dependencies:
+    composer_environment:
+      - network
+      - iam_service_account
+      - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component:composer_environment
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -117,13 +132,13 @@ metadata:
     - terraform-module
     - cicd
     - delivery
+  dependencies:
+    cloud_build: []  # not independently traced this pass
+    cloud_build_private_worker_pool: []  # not independently traced this pass
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: cloud_build
-    - Component: cloud_build_private_worker_pool
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -138,12 +153,11 @@ metadata:
   tags:
     - terraform-module
     - foundation
+  dependencies: {}  # template-level config only, no modules
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component:Template-level config - no modules
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -159,13 +173,19 @@ metadata:
     - terraform-module
     - kubernetes
     - compute
+  dependencies:
+    gke_standard_cluster:
+      - network
+      - iam_service_account
+      - kms
+    # gke_autopilot_cluster:
+    #   - network
+    #   - iam_service_account
+    #   - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    # - Component: gke_autopilot_cluster
-    - Component: gke_standard_cluster
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -181,12 +201,11 @@ metadata:
     - terraform-module
     - kubernetes
     - helm
+  dependencies: {}  # pending ArgoCD replacement decision
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: gap  -> we won't go with helm - we will replace with ArgoCD 
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -202,15 +221,15 @@ metadata:
     - terraform-module
     - security
     - identity
+  dependencies:
+    iam_service_account: []
+    project_iam: []
+    iam_custom_role_stack: []  # not independently traced this pass
+    service_agent_iam: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: iam_service_account
-    - Component: project_iam
-    - Component: iam_custom_role_stack
-    - Component: service_agent_iam
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -226,14 +245,16 @@ metadata:
     - terraform-module
     - integration
     - api
+  dependencies:
+    vpc_connector:
+      - network
+    workload_identity:
+      - iam_service_account
+    cloud_build: []  # not independently traced this pass
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: vpc_connector
-    - Component: workload_identity
-    - Component: cloud_build
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -249,12 +270,12 @@ metadata:
     - terraform-module
     - security
     - encryption
+  dependencies:
+    kms: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: kms
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -270,16 +291,18 @@ metadata:
     - terraform-module
     - networking
     - foundation
+  dependencies:
+    network: []
+    firewall:
+      - network
+    dns:
+      - network
+    external_global_address: []
+    external_global_loadbalancer: []  # not independently traced this pass
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: network
-    - Component: firewall
-    - Component: dns
-    - Component: external_global_address
-    - Component: external_global_loadbalancer
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -295,13 +318,14 @@ metadata:
     - terraform-module
     - networking
     - security
+  dependencies:
+    firewall:
+      - network
+    vf_security_policy: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: firewall
-    - Component: vf_security_policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -317,14 +341,15 @@ metadata:
     - terraform-module
     - operations
     - observability
+  dependencies:
+    cloud_build_private_worker_pool: []  # not independently traced this pass
+    workload_identity:
+      - iam_service_account
+    project_services: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: cloud_build_private_worker_pool
-    - Component: workload_identity
-    - Component: project_services        
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -340,12 +365,13 @@ metadata:
     - terraform-module
     - messaging
     - eventing
+  dependencies:
+    pubsub:
+      - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: pubsub
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -361,17 +387,17 @@ metadata:
     - terraform-module
     - security
     - operations
+  dependencies:
+    alert_policy: []  # not independently traced this pass
+    notification_channel: []  # not independently traced this pass
+    dashboard_bq: []  # not independently traced this pass
+    dashboard_composer: []  # not independently traced this pass
+    dashboard_dataproc: []  # not independently traced this pass
+    dashboard_gcs: []  # not independently traced this pass
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: alert_policy
-    - Component: notification_channel
-    - Component: dashboard_bq
-    - Component: dashboard_composer
-    - Component: dashboard_dataproc
-    - Component: dashboard_gcs
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -387,12 +413,12 @@ metadata:
     - terraform-module
     - security
     - compliance
+  dependencies:
+    vf_security_policy: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: vf_security_policy
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -408,12 +434,15 @@ metadata:
     - terraform-module
     - database
     - sql
+  dependencies:
+    cloud_sql:
+      - network
+      - iam_service_account
+      - kms
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: cloud_sql
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -428,11 +457,14 @@ metadata:
   tags:
     - terraform-module
     - vm_workload
+  dependencies:
+    compute_instance:
+      - network
+      - iam_service_account
+      - kms
+    compute_disk: []
+    compute_resource_policy: []
 spec:
   type: architectural
   lifecycle: production
   owner: platform-engineering
-  dependsOn:
-    - Component: compute_instance
-    - Component: compute_disk
-    - Component: compute_resource_policy
