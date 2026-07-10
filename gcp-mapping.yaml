@@ -281,6 +281,8 @@ spec:
     - Component: firewall
       dependsOn:
         - network
+      wire:
+        network: network.vpc_network.name
     - Component: dns
       dependsOn:
         - network
