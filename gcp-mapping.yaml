@@ -40,6 +40,8 @@ spec:
   terraformModules:
     - Component: bigquery
     - Component: bigquery_table
+      dependsOn:
+        - bigquery
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -277,7 +279,11 @@ spec:
   terraformModules:
     - Component: network
     - Component: firewall
+      dependsOn:
+        - network
     - Component: dns
+      dependsOn:
+        - network
     - Component: external_global_address
     - Component: external_global_loadbalancer
 ---
