@@ -43,8 +43,17 @@ spec:
         - environment
         - iam
         - keys
-        - network 
----      
+        - network
+    dependencies:
+      analytics:
+        - keys
+      bucket:
+        - keys
+      environment: []
+      iam: []
+      keys: []
+      network: []
+---
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
@@ -106,6 +115,41 @@ spec:
         - iam
         - analytics
         - bucket
+    dependencies:
+      bastion:
+        - network
+        - iam
+        - keys
+      delivery: []  # not independently traced this pass
+      environment: []
+      integration:
+        - network
+        - iam
+      keys: []
+      network: []
+      security_operations: []  # not independently traced this pass
+      analytics:
+        - keys
+      bucket:
+        - keys
+      workflow:
+        - network
+        - iam
+        - keys
+      k8s:
+        - network
+        - iam
+        - keys
+      iam: []
+      network_policy:
+        - network
+      pubsub:
+        - keys
+      security_policy: []
+      sql:
+        - network
+        - iam
+        - keys
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -164,8 +208,46 @@ spec:
         - network
         - security_operations
         - security_policy
-        - network_policy        
+        - network_policy
         - sql
+    dependencies:
+      bastion:
+        - network
+        - iam
+        - keys
+      bucket:
+        - keys
+      serverless_app:
+        - keys
+        - integration
+        - network
+        - sql
+        - bucket
+        - iam
+        # - secret_manager  # no building block in this catalog produces secret_manager yet
+      iam: []
+      keys: []
+      network: []
+      security_operations: []  # not independently traced this pass
+      security_policy: []
+      sql:
+        - network
+        - iam
+        - keys
+      analytics:
+        - keys
+      workflow:
+        - network
+        - iam
+        - keys
+      delivery: []  # not independently traced this pass
+      integration:
+        - network
+        - iam
+      network_policy:
+        - network
+      pubsub:
+        - keys
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -211,7 +293,7 @@ spec:
         - bucket
         - workflow
         - delivery
-        - K8s
+        - k8s
         - iam
         - integration
         - keys
@@ -229,13 +311,49 @@ spec:
         - bucket
         - workflow
         - delivery
-        - K8s
+        - k8s
         - iam
         - integration
         - keys
         - network
-        - network_policy        
+        - network_policy
         - security_operations
         - security_policy
         - sql
----        
+    dependencies:
+      bastion:
+        - network
+        - iam
+        - keys
+      analytics:
+        - keys
+      bucket:
+        - keys
+      workflow:
+        - network
+        - iam
+        - keys
+      delivery: []  # not independently traced this pass
+      k8s:
+        - network
+        - iam
+        - keys
+      iam: []
+      integration:
+        - network
+        - iam
+      keys: []
+      network: []
+      security_operations: []  # not independently traced this pass
+      security_policy: []
+      sql:
+        - network
+        - iam
+        - keys
+      network_policy:
+        - network
+      platform_operations:
+        - iam
+      pubsub:
+        - keys
+---
