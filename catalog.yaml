@@ -22,7 +22,7 @@ spec:
   domain: data-platform
   lifecycle: candidate_requires_review
   profile:
-    displayName: "PAT-005 Data Ingestion Landing Zone"
+    displayName: "PAT-001 Data Ingestion Landing Zone"
   metadata:
     status: candidate_requires_review
     releaseBucket: candidate_requires_review
